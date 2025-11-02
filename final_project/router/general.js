@@ -17,7 +17,7 @@ public_users.post("/register", (req,res) => {
 }
 // Return error if username or password is missing
 return res.status(404).json({message: "Unable to register user."});
-  res.send(JSON.stringify({"message" : "success register"}));
+ // res.send(JSON.stringify({"message" : "success register"}));
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
@@ -32,8 +32,8 @@ public_users.get('/',function (req, res) {
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
   //return res.status(300).json({message: "Yet to be implemented"});
-  let ISBNcode = req.params.isbn;
-  res.send(JSON.stringify({"ISBN" : ISBNcode}));
+  let byIsbn = req.params.isbn;
+  res.send(JSON.stringify(books[byIsbn]));
 });
   
 // Get book details based on author
