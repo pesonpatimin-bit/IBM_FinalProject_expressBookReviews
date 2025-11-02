@@ -7,7 +7,18 @@ const public_users = express.Router();
 
 public_users.post("/register", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const username = req.body.username;
+  const password = req.body.password;
+  if (username && password) {
+    // Check if the user does not already exist
+        users.push({"username": username, "password": password});
+        return res.status(200).json({message: "User successfully registered. Now you can login"});
+
+}
+// Return error if username or password is missing
+return res.status(404).json({message: "Unable to register user."});
+  res.send(JSON.stringify({"message" : "success register"}));
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Get the book list available in the shop
@@ -50,25 +61,35 @@ public_users.get('/title/:title',function (req, res) {
   const byTitle = req.params.title;       // ดึงชื่อผู้แต่งจาก URL
   const keys = Object.keys(books);          // เอา keys ของ object
   const result = [];
-
 // iterate key, check title
   keys.forEach(key => {
     if (books[key].title.toLowerCase() === byTitle.toLowerCase()) {
       result.push(books[key]);
     }
   });
-
   //res.send(JSON.stringify(result, null, 4));
     res.json(result)
-
-
-  return res.status(300).json({message: "Yet to be implemented"});
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const byIsbn = req.params.isbn;       // ดึงชื่อผู้แต่งจาก URL
+  const keys = Object.keys(books);          // เอา keys ของ object
+  const result = [];
+// iterate key, check title
+  keys.forEach(key => {
+    if (key=byIsbn) {
+        res.json(books[key].review);
+      //result.push(books[key]);
+    }
+  });
+  //res.send(JSON.stringify(result, null, 4));
+    //res.json(result)
+
+  
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 module.exports.general = public_users;
